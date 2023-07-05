@@ -42,7 +42,6 @@ where P: AsRef<Path>, {
 
 fn calculatewinning_score(outcomes: &mut Vec<&str>) -> u32 {
     
-    
     let mut score: u32 = 0;
     let mut subject_move = outcomes[1];
     
