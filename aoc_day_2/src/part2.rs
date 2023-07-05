@@ -11,20 +11,20 @@ fn main() {
         // Consumes the iterator, returns an (Optional) String
         let mut game_score: u32 ;
         let mut total_score: u32 = 0;
-
+        
         for line in lines {
-
+            
             if let Ok(ip) = line {
                 if ip.len() == 0 {
                     continue;           
                 }
-            let mut outcomes: Vec<&str> = ip.split_whitespace().collect::<Vec<&str>>();    
-            
-            game_score = calculatewinning_score(&mut outcomes);
-    
-            total_score += game_score;
-
-                             
+                let mut outcomes: Vec<&str> = ip.split_whitespace().collect::<Vec<&str>>();    
+                
+                game_score = calculatewinning_score(&mut outcomes);
+                
+                total_score += game_score;
+                
+                
             }
             
         }
@@ -41,76 +41,62 @@ where P: AsRef<Path>, {
 }
 
 fn calculatewinning_score(outcomes: &mut Vec<&str>) -> u32 {
-
-
+    
+    
     let mut score: u32 = 0;
-
     let mut subject_move = outcomes[1];
-
-
+    
+    
     if subject_move=="X" {
-    
-        if outcomes[0] == "A"{
-            subject_move = "S";
-        } else if outcomes[0] == "B" {
-            subject_move = "R";
-        } else if outcomes[0] == "C" {
-            subject_move = "P";
-
-        }
+        
+        subject_move = match outcomes[0] {
+            "A" => "S",
+            "B" => "R",
+            "C" => "P",
+            _ => subject_move,
+        };
     }
-
+    
     if subject_move=="Y" {
-    
-        if outcomes[0] == "A" {
-            subject_move = "R";
-        } else if outcomes[0] == "B" {
-            subject_move = "P";
-        } else if outcomes[0] == "C" {
-            subject_move = "S";
-
-        }
+        
+        subject_move = match outcomes[0] {
+            "A" => "R",
+            "B" => "P",
+            "C" => "S",
+            _ => subject_move,
+        };
     }
-
+    
     if subject_move=="Z" {
-    
-        if outcomes[0] == "A" {
-            subject_move = "P";
-        } else if outcomes[0] == "B" {
-            subject_move = "S";
-        } else if outcomes[0] == "C" {
-            subject_move = "R";
-
-        }
+        
+        subject_move = match outcomes[0] {
+            "A" => "P",
+            "B" => "S",
+            "C" => "R",
+            _ => subject_move,
+        };
     }
-   
-    if subject_move == "R" {
-        score = 1;
-    } else if subject_move == "P" {
-        score = 2;
-    } else if subject_move== "S" {
-        score = 3;
-    } 
-
     
-    if outcomes[0] == "A" && subject_move == "R"  {
-        score += 3;
-    } else if outcomes[0] == "A" && subject_move == "P" {
-        score += 6;
-    } else if outcomes[0] == "A" && subject_move == "S"  {
-        score += 0;
-    } else if outcomes[0] == "B" && subject_move == "S" {
-        score += 6;
-    } else if outcomes[0] == "B" && subject_move == "P" {
-        score += 3;
-    } else if outcomes[0] == "B" && subject_move == "R" {
-        score += 0;
-    } else if outcomes[0] == "C" && subject_move == "R" {
-        score += 6;
-    }else if outcomes[0] == "C" && subject_move == "P"  {
-        score += 0;
-    } else if outcomes[0] == "C" && subject_move == "S" {
-        score += 3;
+    match subject_move {
+        "R" => score = 1,
+        "P" => score = 2,
+        "S" => score = 3,
+        _ => (),
     }
+    
+    
+    match (outcomes[0], subject_move) {
+        ("A", "R") => score += 3,
+        ("A", "P") => score += 6,
+        ("A", "S") => score += 0,
+        ("B", "S") => score += 6,
+        ("B", "P") => score += 3,
+        ("B", "R") => score += 0,
+        ("C", "R") => score += 6,
+        ("C", "P") => score += 0,
+        ("C", "S") => score += 3,
+        _ => (),
+    }
+    
     return score;
 }
