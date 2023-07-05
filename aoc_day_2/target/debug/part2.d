@@ -1,1 +1,1 @@
-C:\Repos\aoc_day2\target\debug\part2.exe: C:\Repos\aoc_day2\src\part2.rs
+C:\Users\bbanerjee\source\repos\advent_of_code_rust\aoc_day_2\target\debug\part2.exe: C:\Users\bbanerjee\source\repos\advent_of_code_rust\aoc_day_2\src\part2.rs

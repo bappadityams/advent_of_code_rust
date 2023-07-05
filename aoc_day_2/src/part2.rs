@@ -100,11 +100,11 @@ fn calculatewinning_score(outcomes: &mut Vec<&str>) -> u32 {
     } else if outcomes[0] == "A" && subject_move == "S"  {
         score += 0;
     } else if outcomes[0] == "B" && subject_move == "S" {
-        score += 0;
+        score += 6;
     } else if outcomes[0] == "B" && subject_move == "P" {
         score += 3;
     } else if outcomes[0] == "B" && subject_move == "R" {
-        score += 6;
+        score += 0;
     } else if outcomes[0] == "C" && subject_move == "R" {
         score += 6;
     }else if outcomes[0] == "C" && subject_move == "P"  {
